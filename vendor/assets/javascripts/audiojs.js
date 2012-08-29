@@ -166,7 +166,12 @@
         var player = this.settings.createPlayer,
             scrubber = getByClass(player.scrubberClass, this.wrapper),
             loaded = getByClass(player.loaderClass, this.wrapper);
-        loaded.style.width = (scrubber.offsetWidth * percent) + 'px';
+
+        try {
+          loaded.style.width = (scrubber.offsetWidth * percent) + 'px';
+        } catch(e) {
+          console.debug('error in loadProgress')
+        }
       },
       playPause: function() {
         if (this.playing) this.settings.play();
@@ -184,7 +189,11 @@
         var player = this.settings.createPlayer,
             scrubber = getByClass(player.scrubberClass, this.wrapper),
             progress = getByClass(player.progressClass, this.wrapper);
-        progress.style.width = (scrubber.offsetWidth * percent) + 'px';
+        try {
+          progress.style.width = (scrubber.offsetWidth * percent) + 'px';
+        } catch(e) {
+          console.debug('error in updatePlayhead')
+        }
 
         var played = getByClass(player.playedClass, this.wrapper),
             p = this.duration * percent,
